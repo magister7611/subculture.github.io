@@ -5,17 +5,86 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>서브컬쳐 RP 커뮤니티</title>
 
-  <meta property="og:title" content="서브컬쳐 RP 커뮤니티 안내소">
+<meta property="og:title" content="서브컬쳐 RP 커뮤니티 안내소">
 <meta property="og:description" content="캐릭터 신청, 활동신청, 운영 안내를 확인할 수 있는 공식 안내 페이지입니다.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://magister7611.github.io/subculture.github.io/">
 <meta property="og:image" content="https://i.ibb.co/nM394kfZ/Bronz.png">
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="서브컬쳐 RP 커뮤니티 안내소">
-<meta name="twitter:description" content="캐릭터 신청, 활동신청, 운영 안내를 확인할 수 있는 공식 안내 페이지입니다.">
-<meta name="twitter:image" content="https://i.ibb.co/nM394kfZ/Bronz.png">
+  
   <style>
+
+    .notice-list {
+display: flex;
+flex-direction: column;
+gap: 12px;
+}
+
+.notice-item {
+border: 1px solid #374151;
+border-radius: 14px;
+background: #111827;
+overflow: hidden;
+}
+
+.notice-toggle {
+width: 100%;
+border: 0;
+background: transparent;
+color: #f9fafb;
+padding: 18px 20px;
+font-size: 17px;
+font-weight: bold;
+text-align: left;
+cursor: pointer;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.notice-toggle:hover {
+background: #1f2937;
+}
+
+.notice-toggle::after {
+content: "＋";
+color: #93c5fd;
+font-size: 20px;
+}
+
+.notice-item.open .notice-toggle::after {
+content: "－";
+}
+
+.notice-panel {
+max-height: 0;
+overflow: hidden;
+opacity: 0;
+transition: max-height 0.45s ease, opacity 0.3s ease;
+}
+
+.notice-item.open .notice-panel {
+opacity: 1;
+}
+
+.notice-content {
+padding: 0 20px 20px 20px;
+color: #cbd5e1;
+}
+
+.notice-content p {
+margin: 12px 0;
+}
+
+.notice-content strong {
+color: #f9fafb;
+}
+
+.notice-content ol,
+.notice-content ul {
+padding-left: 22px;
+}
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -116,6 +185,99 @@
         캐릭터 변경 시 기존 보유 재화는 유지됩니다.
       </p>
     </section>
+    <section class="card">
+  <h2>공지 및 규정</h2>
+  <p class="muted">
+    각 항목을 누르면 세부 규정을 확인할 수 있습니다.
+  </p>
+
+  <div class="notice-list">
+    <div class="notice-item">
+      <button class="notice-toggle" type="button">캐릭터 허용 범위 및 밸런스 규정</button>
+      <div class="notice-panel">
+        <div class="notice-content">
+          <p>
+            <strong>1인 1캐릭터, 중복 불가.</strong><br>
+            본 커뮤니티는 선점 제도를 적용합니다. 이미 다른 멤버가 활동 중인 공식 캐릭터는 중복으로 신청하거나 활동할 수 없습니다.
+          </p>
+
+```
+      <p>
+        <strong>공식 캐릭터 한정, 자캐 금지.</strong><br>
+        허용된 서브컬처 게임의 공식 캐릭터만 신청할 수 있습니다. 유저의 창작 캐릭터, 자캐, 오리지널 캐릭터는 허용하지 않습니다.
+      </p>
+
+      <p>
+        <strong>상호 동의 기반의 간섭 제한.</strong><br>
+        서로 다른 세계관 간의 조우, 개입, 전투, 간섭은 양측 오너의 동의가 있을 때만 성립합니다.
+        한쪽이 원하지 않는 일방적인 공격, 개입, 납치, 제압, 설정 침범은 불가능합니다.
+      </p>
+
+      <p>
+        <strong>세계관 이동 시 현지 규칙 적용.</strong><br>
+        A 세계관의 캐릭터가 B 세계관의 세상으로 이동할 경우, 해당 세계의 파워 밸런스, 물리 법칙, 사회적 규칙에 강제로 얽매입니다.
+        예를 들어 스케일이 큰 캐릭터라도 학원물 세계관으로 이동하면 해당 세계 수준에 맞게 능력이 조정됩니다.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="notice-item">
+  <button class="notice-toggle" type="button">가입 및 활동 문턱</button>
+  <div class="notice-panel">
+    <div class="notice-content">
+      <p>
+        <strong>연령 제한.</strong><br>
+        본 커뮤니티는 만 15세 이상, 또는 운영진이 지정한 특정 출생 연도 이상만 가입할 수 있습니다.
+      </p>
+
+      <p>
+        <strong>가입 절차는 2단계로 진행됩니다.</strong>
+      </p>
+
+      <ol>
+        <li>
+          <strong>1단계: 간단 퀴즈</strong><br>
+          세계관 융합, 캐릭터 간 간섭, 밸런스 조정 등 필수 규칙을 숙지했는지 확인하는 간단한 문제 풀이를 진행합니다.
+        </li>
+        <li>
+          <strong>2단계: 짧은 면접 및 안내</strong><br>
+          리더 또는 공동리더가 간단한 면접을 통해 신청자를 확인하고, 최종 주의사항을 안내한 뒤 가입을 승인합니다.
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<div class="notice-item">
+  <button class="notice-toggle" type="button">역극 진행 및 시스템 규칙</button>
+  <div class="notice-panel">
+    <div class="notice-content">
+      <p>
+        <strong>오너방 철저 금지.</strong><br>
+        밴드 내에서 현실의 나, 즉 오너로서 대화하고 친목을 도모하는 별도의 오너방 개설 및 활동은 완전히 금지합니다.
+        본 커뮤니티는 캐릭터 이입 중심의 역극 환경을 지향합니다.
+      </p>
+
+      <p>
+        <strong>수위 제한: 15세 이용가 기준.</strong><br>
+        전반적으로 약한 폭력성, 일상적 로맨스, 가벼운 갈등 등 15세 이용가 수준의 표현까지만 허용합니다.
+        단, 특정 게임 장르나 배경에 따라 분위기가 과도하게 무거워지거나 수위를 넘을 수 있는 요소는 추가로 제한될 수 있습니다.
+      </p>
+
+      <p>
+        <strong>활동량 규정: 7일 주기.</strong><br>
+        유령 회원을 방지하기 위해 최소 7일에 1회 이상은 활동을 인증해야 합니다.
+        활동 인정 범위는 역극 참여, 활동신청 폼 제출, 운영진이 인정하는 관련 활동을 기준으로 합니다.
+      </p>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
   </main>
 </body>
 </html>
