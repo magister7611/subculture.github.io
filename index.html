@@ -20,18 +20,16 @@
   <meta name="twitter:image" content="https://magister7611.github.io/subculture.github.io/preview.png">
 
   <style>
-    /* 우주/별하늘 테마 베이스 스타일 구성을 위한 수정 */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #090514; /* 깊은 암자색 우주 공간 베이스 */
-      color: #f3e8ff; /* 연한 라벤더빛 텍스트 컬러 */
+      background: #090514; 
+      color: #f3e8ff; 
       line-height: 1.7;
       position: relative;
       overflow-x: hidden;
     }
 
-    /* 가상 요소를 이용한 배경 성운(Nebula) 효과 */
     body::before {
       content: "";
       position: fixed;
@@ -47,7 +45,6 @@
       pointer-events: none;
     }
 
-    /* 가상 요소를 이용한 반짝이는 밤하늘 별 무리 효과 */
     body::after {
       content: "";
       position: fixed;
@@ -57,7 +54,7 @@
       height: 100%;
       background-image: 
         radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
-        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+        radial-gradient(white, rgba(255,255,255,.1) 1px, transparent 30px),
         radial-gradient(white, rgba(255,255,255,.1) 1.5px, transparent 40px);
       background-size: 550px 550px, 350px 350px, 250px 250px;
       background-position: 0 0, 40px 60px, 130px 270px;
@@ -67,16 +64,18 @@
       animation: starTwinkle 8s infinite linear;
     }
 
-    /* 별빛이 서서히 반짝이는 애니메이션 */
     @keyframes starTwinkle {
       0%, 100% { opacity: 0.3; }
       50% { opacity: 0.6; }
     }
 
+    /* [수정] 헤더 영역: 고정 높이 대신 화면 너비(vw)에 따라 유연하게 변하도록 변경 */
     .hero {
       position: relative;
       width: 100%;
-      height: 320px;
+      height: 32vw; /* 화면 너비의 32% 비율 유지 */
+      min-height: 260px; /* 모바일 최소 높이 제한 */
+      max-height: 440px; /* PC 모니터 최대 높이 제한 */
       overflow: hidden;
       background: #020005;
     }
@@ -87,10 +86,10 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center 30%; /* 캐릭터들 얼굴 구도에 맞춰 중심점 살짝 위로 조정 */
       filter: brightness(35%) contrast(110%);
     }
 
-    /* 헤더 영역을 암자색 우주 공간과 자연스럽게 블렌딩 */
     .hero-overlay {
       position: absolute;
       inset: 0;
@@ -115,7 +114,7 @@
 
     .hero-content h1 {
       margin: 0 0 12px 0;
-      font-size: 38px;
+      font-size: clamp(22px, 4vw, 38px); /* 화면 크기에 맞게 글자 크기 자동 조절 */
       color: #ffffff;
       text-shadow: 0 0 15px rgba(167, 139, 250, 0.6), 0 2px 8px rgba(0, 0, 0, 0.9);
     }
@@ -123,7 +122,7 @@
     .hero-content p {
       margin: 0;
       color: #ddd6fe;
-      font-size: 16px;
+      font-size: clamp(13px, 1.8vw, 16px); /* 화면 크기에 맞게 글자 크기 자동 조절 */
       font-weight: bold;
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
     }
@@ -134,7 +133,6 @@
       padding: 40px 20px;
     }
 
-    /* 카드 디자인: 반투명 암자색 글래스모피즘 스타일 스타일 적용 */
     .card {
       background: rgba(22, 14, 38, 0.75);
       border: 1px solid rgba(139, 92, 246, 0.25);
@@ -145,7 +143,6 @@
       box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
     }
 
-    /* 타이틀에 신비로운 보라빛 네온 가독성 추가 */
     h2 {
       margin-top: 0;
       margin-bottom: 18px;
@@ -170,6 +167,17 @@
       border-radius: 12px;
       margin: 16px 0;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    /* [추가] 상점 품목 이미지 전용 스타일: 카드를 절대 벗어나지 않고 100% 비율로 축소 연동 */
+    .store-placeholder img {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(139, 92, 246, 0.2);
     }
 
     .genre-list {
@@ -206,7 +214,6 @@
       position: relative;
     }
 
-    /* 배너 이미지 위에 어두운 보라색 틴트 오버레이 레이어 추가 */
     .genre-toggle::before {
       content: "";
       position: absolute;
@@ -244,7 +251,6 @@
       transform: rotate(180deg);
     }
 
-    /* 아코디언 내부 패널 스타일링 */
     .genre-panel {
       max-height: 0;
       overflow: hidden;
@@ -349,8 +355,6 @@
     .store-placeholder {
       margin-top: 12px;
       text-align: center;
-      color: #cbd5e1;
-      font-style: italic;
     }
 
     .button-area {
@@ -360,7 +364,6 @@
       margin-top: 20px;
     }
 
-    /* 하단 핵심 버튼 영역에 어울리는 보라색 그라데이션 및 우주선 엔진빛 발광(Glow) 효과 추가 */
     a.button {
       display: inline-block;
       padding: 16px 28px;
@@ -384,11 +387,7 @@
 
     @media (max-width: 640px) {
       .hero {
-        height: 240px;
-      }
-
-      .hero-content h1 {
-        font-size: 28px;
+        height: 200px;
       }
 
       .card {
@@ -410,6 +409,7 @@
 
 <body>
   <section class="hero">
+    <!-- 2번 외부 이미지 (헤더 대문) -->
     <img
       class="hero-bg"
       src="https://i.ibb.co/FkB2tPSM/07.png"
@@ -576,8 +576,9 @@
         src="https://i.ibb.co/Xr6BYPSz/16.png"
         alt="구매 및 후원 대문"
       />
+      <!-- [변경] 1번 외부 이미지 (상점 내역 스크린샷) -->
       <p class="store-placeholder">
-        <img src="https://i.ibb.co/8LjksmS8/09.png" alt="상점 준비중 이미지">
+        <img src="https://i.ibb.co/8LjksmS8/09.png" alt="상점 품목 리스트">
       </p>
     </section>
 
