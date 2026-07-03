@@ -30,38 +30,38 @@
       overflow-x: hidden;
     }
 
-    body::before {
-      content: "";
+    .space-bg {
       position: fixed;
-      top: -20%;
-      left: -20%;
-      width: 140%;
-      height: 140%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background: 
         radial-gradient(circle at 20% 30%, rgba(88, 28, 135, 0.25) 0%, transparent 50%),
         radial-gradient(circle at 80% 70%, rgba(67, 56, 202, 0.2) 0%, transparent 45%),
         radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.15) 0%, transparent 60%);
       z-index: -2;
       pointer-events: none;
+      transform: translateZ(0); /* 모바일 기기 GPU 가속 강제 활성화 */
     }
 
-    body::after {
-      content: "";
+    .stars-bg {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       background-image: 
-        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
-        radial-gradient(white, rgba(255,255,255,.1) 1px, transparent 30px),
-        radial-gradient(white, rgba(255,255,255,.1) 1.5px, transparent 40px);
+        radial-gradient(white, rgba(255,255,255,.4) 2px, transparent 40px),
+        radial-gradient(white, rgba(255,255,255,.3) 1.5px, transparent 30px),
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px);
       background-size: 550px 550px, 350px 350px, 250px 250px;
       background-position: 0 0, 40px 60px, 130px 270px;
-      opacity: 0.4;
+      opacity: 0.6; 
       z-index: -1;
       pointer-events: none;
-      animation: starTwinkle 8s infinite linear;
+      animation: starTwinkle 6s infinite linear;
+      transform: translateZ(0); 
     }
 
     @keyframes starTwinkle {
@@ -69,13 +69,12 @@
       50% { opacity: 0.6; }
     }
 
-    /* [수정] 헤더 영역: 고정 높이 대신 화면 너비(vw)에 따라 유연하게 변하도록 변경 */
     .hero {
       position: relative;
       width: 100%;
-      height: 32vw; /* 화면 너비의 32% 비율 유지 */
-      min-height: 260px; /* 모바일 최소 높이 제한 */
-      max-height: 440px; /* PC 모니터 최대 높이 제한 */
+      height: 32vw;
+      min-height: 260px;
+      max-height: 440px;
       overflow: hidden;
       background: #020005;
     }
@@ -86,7 +85,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 30%; /* 캐릭터들 얼굴 구도에 맞춰 중심점 살짝 위로 조정 */
+      object-position: center 30%; 
       filter: brightness(35%) contrast(110%);
     }
 
@@ -114,7 +113,7 @@
 
     .hero-content h1 {
       margin: 0 0 12px 0;
-      font-size: clamp(22px, 4vw, 38px); /* 화면 크기에 맞게 글자 크기 자동 조절 */
+      font-size: clamp(22px, 4vw, 38px); 
       color: #ffffff;
       text-shadow: 0 0 15px rgba(167, 139, 250, 0.6), 0 2px 8px rgba(0, 0, 0, 0.9);
     }
@@ -122,7 +121,7 @@
     .hero-content p {
       margin: 0;
       color: #ddd6fe;
-      font-size: clamp(13px, 1.8vw, 16px); /* 화면 크기에 맞게 글자 크기 자동 조절 */
+      font-size: clamp(13px, 1.8vw, 16px); 
       font-weight: bold;
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
     }
@@ -169,7 +168,6 @@
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     }
 
-    /* [추가] 상점 품목 이미지 전용 스타일: 카드를 절대 벗어나지 않고 100% 비율로 축소 연동 */
     .store-placeholder img {
       width: 100%;
       max-width: 100%;
@@ -408,6 +406,9 @@
 </head>
 
 <body>
+  <div class="space-bg"></div>
+  <div class="stars-bg"></div>
+  
   <section class="hero">
     <!-- 2번 외부 이미지 (헤더 대문) -->
     <img
