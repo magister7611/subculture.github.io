@@ -30,6 +30,75 @@
       overflow-x: hidden;
     }
 
+    /* 말풍선들이 배치될 전체 투명 컨테이너 (클릭 방해 방지 pointer-events) */
+    #bubble-container {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10000;
+      display: flex;
+      flex-direction: column-reverse; /* 최신 말풍선이 가장 아래에 쌓이도록 */
+      align-items: center;
+      gap: 12px;
+      pointer-events: none; 
+    }
+
+    /* 뾰로롱 올라올 말풍선 개별 디자인 */
+    .speech-bubble {
+      background: linear-gradient(135deg, rgba(147, 51, 234, 0.85), rgba(76, 29, 149, 0.85));
+      border: 1px solid rgba(192, 132, 252, 0.4);
+      color: #ffffff;
+      padding: 12px 22px;
+      border-radius: 30px;
+      font-size: 15px;
+      font-weight: bold;
+      white-space: nowrap;
+      box-shadow: 0 0 15px rgba(167, 139, 250, 0.5), inset 0 0 8px rgba(255, 255, 255, 0.2);
+      position: relative;
+      
+      /* 애니메이션: 3.5초 동안 작동 후 멈춤 */
+      animation: floatUpAndFade 3.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    /* 말풍선 아래쪽 꼬리 모양 지시선 */
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      bottom: -7px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 7px 7px 0;
+      border-style: solid;
+      border-color: rgba(76, 29, 149, 0.85) transparent;
+      display: block;
+      width: 0;
+    }
+
+    /* 뾰로롱 솟아올랐다가 잔잔히 머물고 사라지는 마법 같은 애니메이션 수치 */
+    @keyframes floatUpAndFade {
+      0% {
+        transform: translateY(80px) scale(0.4);
+        opacity: 0;
+      }
+      12% {
+        transform: translateY(-10px) scale(1.1); /* 살짝 튕기는 느낌 */
+        opacity: 1;
+      }
+      20% {
+        transform: translateY(0) scale(1); /* 제자리 고정 */
+        opacity: 1;
+      }
+      80% {
+        transform: translateY(-20px) scale(1); /* 서서히 위로 흐름 */
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-50px) scale(0.85);
+        opacity: 0; /* 완전히 소멸 */
+      }
+    }
+
     .space-bg {
       position: fixed;
       top: 0;
@@ -413,6 +482,8 @@
 <body>
   <div class="space-bg"></div>
   <div class="stars-bg"></div>
+
+  <div id="bubble-container"></div>
   
   <section class="hero">
     <!-- 2번 외부 이미지 (헤더 대문) -->
@@ -871,6 +942,10 @@
         <a class="button" href="https://forms.gle/jWWD5a5AAFsS7kmp8" target="_blank">캐릭터 신청·변경</a>
         <a class="button" href="https://forms.gle/sXSS3NVo333QmnBU9" target="_blank">활동신청</a>
         <a class="button" href="https://forms.gle/VtiENHknDKMDqLGL7" target="_blank">상점</a>
+        
+        <button id="event-trigger-btn" class="button" style="margin-top: 15px;">
+          🔮 오늘의 실시간 한마디 보기
+        </button>
       </div>
     </section>
   </main>
@@ -982,5 +1057,37 @@ function normalizeText(value) {
 loadOccupiedCharacters();
 </script>
 
+  <script>
+    const eventMessages = [
+      "✨ 다차원 관리국에 오신 것을 환영합니다!",
+      "🔮 활동 신청을 완료하고 '차원 결정'을 획득해보세요!",
+      "📢 프로필 설정 시 캐릭터 '성'은 제외하는 것, 잊지 마세요!",
+      "🎉 오늘도 즐거운 서브컬쳐 역극 라이프!"
+    ];
+
+    document.getElementById('event-trigger-btn').addEventListener('click', function() {
+      const container = document.getElementById('bubble-container');
+      
+      container.innerHTML = '';
+
+      eventMessages.forEach((msg, index) => {
+        setTimeout(() => {
+          const bubble = document.createElement('div');
+          bubble.className = 'speech-bubble';
+          bubble.textContent = msg;
+
+          const randomX = Math.floor(Math.random() * 41) - 20;
+          bubble.style.marginLeft = `${randomX}px`;
+
+          container.appendChild(bubble);
+
+          setTimeout(() => {
+            bubble.remove();
+          }, 3500);
+          
+        }, index * 400); 
+      });
+    });
+  
 </body>
 </html>
