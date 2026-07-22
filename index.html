@@ -19,19 +19,17 @@
     body {
       margin: 0;
       font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
-      background: #000000; /* 완전히 검은 배경 */
+      background: #000000;
       color: #f3e8ff; 
       line-height: 1.7;
       position: relative;
       overflow-x: hidden;
     }
 
-    /* 보라색 배경 빛무리 완벽 비활성화 */
     .space-bg {
       display: none;
     }
 
-    /* 반짝이는 별빛 배경 유지 */
     .stars-bg {
       position: fixed;
       top: 0;
@@ -54,7 +52,6 @@
       50% { opacity: 0.6; }
     }
 
-    /* 📌 히어로 대문 - 검은색 배경 및 비율 맞춤 */
     .hero {
       width: 100%;
       background: #000000;
@@ -73,7 +70,6 @@
       object-fit: contain;
     }
 
-    /* 메인 컨테이너 */
     .wrap {
       max-width: 1040px;
       margin: 0 auto;
@@ -468,15 +464,7 @@
         const data = await response.json();
         renderGridCards(data);
       } catch (error) {
-        console.error("API 불러오기 실패 (샘플 데이터 모드로 전환):", error);
-        const sampleData = [
-          { genre: '명조', character: '방랑자', status: '활동중' },
-          { genre: '명조', character: '양양', status: '활동중' },
-          { genre: '명일방주 엔드필드', character: '펠리카', status: '활동중' },
-          { genre: '블루아카이브', character: '시로코', status: '활동중' },
-          { genre: '원신', character: '종려', status: '활동중' }
-        ];
-        renderGridCards(sampleData);
+        console.error("API 불러오기 실패:", error);
       }
     }
 
@@ -518,6 +506,7 @@
       });
     }
 
+    // 📌 실시간 재화 조회 이벤트 (샘플 데이터 문구 전면 제거)
     document.getElementById('currency-search-btn').addEventListener('click', async () => {
       const inputName = document.getElementById('currency-user-input').value.trim();
       const resultBox = document.getElementById('currency-result');
@@ -528,19 +517,22 @@
       }
 
       resultBox.style.display = 'block';
-      resultBox.innerHTML = '조회 중입니다... ⏳';
+      resultBox.innerHTML = 'DB에서 보유 재화를 조회 중입니다... ⏳';
 
       try {
         const response = await fetch(`${API_URL}?type=currency&name=${encodeURIComponent(inputName)}`);
         const data = await response.json();
 
-        if (data && data.amount !== undefined && data.amount !== null) {
-          resultBox.innerHTML = `<strong>[ ${inputName} ]</strong> 님의 보유 차원 결정: <b style="color: #c084fc; font-size: 18px;">${data.amount}개</b>`;
+        if (data && data.found) {
+          resultBox.innerHTML = `<strong>[ ${data.character} ]</strong> 님의 보유 차원 결정: <b style="color: #c084fc; font-size: 18px;">${data.amount}개</b>`;
+        } else if (data && data.found === false) {
+          resultBox.innerHTML = `<span style="color: #f87171;"><strong>[ ${inputName} ]</strong> 님은 회원DB에 등록되지 않은 캐릭터입니다.</span>`;
         } else {
-          resultBox.innerHTML = `<strong>[ ${inputName} ]</strong> 님의 보유 차원 결정: <b style="color: #c084fc; font-size: 18px;">15개</b> (샘플 데이터)`;
+          resultBox.innerHTML = `<span style="color: #f87171;">조회 응답 형식에 오류가 있습니다.</span>`;
         }
       } catch (error) {
-        resultBox.innerHTML = `<strong>[ ${inputName} ]</strong> 님의 보유 차원 결정: <b style="color: #c084fc; font-size: 18px;">10개</b> (테스트)`;
+        console.error("재화 조회 오류:", error);
+        resultBox.innerHTML = `<span style="color: #f87171;">서버 통신 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.</span>`;
       }
     });
 
