@@ -8,6 +8,7 @@
 
   <meta name="description" content="캐릭터 신청, 활동신청, 운영 안내를 확인할 수 있는 공식 안내 페이지입니다.">
 
+  <!-- OpenGraph / Twitter URL 미리보기 설정 -->
   <meta property="og:title" content="서브컬쳐 역극밴드 - 종합 안내소">
   <meta property="og:description" content="캐릭터 신청, 활동신청, 운영 안내를 확인할 수 있는 공식 안내 페이지입니다.">
   <meta property="og:type" content="website">
@@ -62,31 +63,32 @@
       50% { opacity: 0.6; }
     }
 
-    /* 히어로 대문 */
+    /* 📌 히어로 대문 - 검은색 배경 및 비율 맞춤(잘림 방지) */
     .hero {
       position: relative;
       width: 100%;
-      height: 32vw;
-      min-height: 240px;
-      max-height: 400px;
+      height: clamp(180px, 25vw, 350px);
       overflow: hidden;
-      background: #020005;
+      background: #000000; /* 보라색 대신 순수 검은색 적용 */
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .hero-bg {
-      position: absolute;
-      inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
-      object-position: center 30%; 
-      filter: brightness(40%) contrast(110%);
+      object-fit: contain; /* 이미지가 잘리지 않고 전체가 들어오도록 설정 */
+      object-position: center; 
+      filter: none; /* 필터를 제거하여 로고 글자가 선명하게 노출됨 */
     }
 
     .hero-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(to bottom, rgba(9, 5, 20, 0.2), rgba(9, 5, 20, 0.95));
+      /* 하단 그라데이션을 보라색 대신 자연스러운 검은색 투명도로 변경 */
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 40%, rgba(9, 5, 20, 0.85) 100%);
+      pointer-events: none;
     }
 
     .hero-content {
@@ -253,15 +255,6 @@
       padding: 15px 0;
     }
 
-    .status-tag {
-      font-size: 11px;
-      padding: 2px 8px;
-      border-radius: 6px;
-      background: rgba(236, 72, 153, 0.2);
-      color: #f472b6;
-      border: 1px solid rgba(236, 72, 153, 0.3);
-    }
-
     .search-box {
       display: flex;
       gap: 10px;
@@ -358,13 +351,10 @@
   <div class="space-bg"></div>
   <div class="stars-bg"></div>
 
+  <!-- 대문 헤더 -->
   <section class="hero">
     <img class="hero-bg" src="https://i.ibb.co/20PL6H8S/BAND-2026-07-22-16-39-39.jpg" alt="서브컬쳐 역극밴드 대문" />
     <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <h1>서브컬쳐 모바일 게임 역극밴드</h1>
-      <p>명조 · 명일방주: 엔드필드 · 원신 · 블루 아카이브 · 젠레스 존 제로</p>
-    </div>
   </section>
 
   <main class="wrap">
@@ -372,14 +362,14 @@
       <h2>📜 밴드 소개</h2>
       <p class="muted" style="margin-bottom: 0;">
         다양한 서브컬쳐 모바일 게임의 캐릭터로 활동하는 역극 밴드입니다.
-        메이저 5대 게임을 중심으로 활동하며, 셀프 신청 코너를 통해 자유롭게 캐릭터 및 활동 신청이 가능합니다.
+        메이저 5대 게임을 중심으로 활동하며, 하단 구글폼을 통해 캐릭터 및 활동 신청이 가능합니다.
       </p>
     </section>
 
-    <!-- 📌 [개편] 2열 카드 그리드 장르별 공석표 (클릭 필요 없이 전체 노출) -->
+    <!-- 2열 카드 그리드 장르별 공석표 -->
     <section class="card">
       <h2>📊 장르별 비공석 현황</h2>
-      <p class="muted">현재 활동/선점 중인 캐릭터 목록입니다. 클릭 없이 바로 확인 가능합니다.</p>
+      <p class="muted">현재 활동/선점 중인 캐릭터 목록입니다.</p>
 
       <img class="banner-img" src="https://i.ibb.co/FLvLwpNz/BAND-2026-06-08-00-13-51-02.jpg" alt="세계 목록 및 종합 공석표" />
 
@@ -473,11 +463,11 @@
     </section>
 
     <section class="card">
-      <h2>📝 셀프 신청 센터</h2>
-      <p class="muted">관리자 대기 없이 구글폼을 통해 신청하면 즉시 내역이 기록됩니다.</p>
+      <h2>📝 신청 센터</h2>
+      <p class="muted">구글폼을 통해 신청하면 확인 후 시트에 등록됩니다.</p>
       <div class="button-area">
-        <a class="button" href="https://forms.gle/jWWD5a5AAFsS7kmp8" target="_blank">캐릭터 셀프 신청·변경</a>
-        <a class="button" href="https://forms.gle/sXSS3NVo333QmnBU9" target="_blank">활동 셀프 신청 (자율)</a>
+        <a class="button" href="https://forms.gle/jWWD5a5AAFsS7kmp8" target="_blank">캐릭터 신청·변경</a>
+        <a class="button" href="https://forms.gle/sXSS3NVo333QmnBU9" target="_blank">활동 신청 (자율)</a>
         <a class="button" href="https://forms.gle/VtiENHknDKMDqLGL7" target="_blank">상점 이용 신청</a>
       </div>
     </section>
@@ -491,7 +481,7 @@
           <button class="notice-toggle" type="button">캐릭터 신청 및 변경 안내</button>
           <div class="notice-panel">
             <div class="notice-content">
-              <p>서브컬처 역극밴드에서 활동하기 위해서는 셀프 신청 코너의 구글폼을 통해 캐릭터를 신청해 주셔야 합니다.</p>
+              <p>서브컬처 역극밴드에서 활동하기 위해서는 구글폼을 통해 캐릭터를 신청해 주셔야 합니다.</p>
               <p><strong>프로필 이름:</strong> 캐릭터 성을 제외한 한글 정식 명칭 (예: 시로코 ○)</p>
             </div>
           </div>
@@ -502,7 +492,7 @@
           <div class="notice-panel">
             <div class="notice-content">
               <p>활동 신청은 <strong>필수가 아닌 자율 참여 방식</strong>입니다.</p>
-              <p>역극, 로그 작성, 출석 등 활동 후 셀프 활동 신청서를 작성하시면 '차원 결정' 재화가 지급됩니다.</p>
+              <p>역극, 로그 작성, 출석 등 활동 후 신청서를 작성하시면 '차원 결정' 재화가 지급됩니다.</p>
             </div>
           </div>
         </div>
@@ -529,7 +519,6 @@
           { genre: '명조', character: '양양', status: '활동중' },
           { genre: '명일방주 엔드필드', character: '펠리카', status: '활동중' },
           { genre: '블루아카이브', character: '시로코', status: '활동중' },
-          { genre: '블루아카이브', character: '아리스', status: '취약' },
           { genre: '원신', character: '종려', status: '활동중' }
         ];
         renderGridCards(sampleData);
@@ -549,8 +538,7 @@
         const characters = data.filter(entry => {
           return normalizeText(entry.genre) === genreName &&
             entry.character &&
-            entry.status !== '캐릭터 상실' &&
-            entry.status !== '존재소멸';
+            entry.status !== '캐릭터 상실';
         });
 
         list.innerHTML = '';
@@ -569,13 +557,6 @@
           const nameSpan = document.createElement('span');
           nameSpan.textContent = displayName;
           li.appendChild(nameSpan);
-
-          if (entry.status && entry.status !== '활동중') {
-            const tag = document.createElement('span');
-            tag.className = 'status-tag';
-            tag.textContent = entry.status;
-            li.appendChild(tag);
-          }
 
           list.appendChild(li);
         });
@@ -601,7 +582,6 @@
         if (data && data.amount !== undefined && data.amount !== null) {
           resultBox.innerHTML = `<strong>[ ${inputName} ]</strong> 님의 보유 차원 결정: <b style="color: #c084fc; font-size: 18px;">${data.amount}개</b>`;
         } else {
-
           resultBox.innerHTML = `<strong>[ ${inputName} ]</strong> 님의 보유 차원 결정: <b style="color: #c084fc; font-size: 18px;">15개</b> (샘플 데이터)`;
         }
       } catch (error) {
