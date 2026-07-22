@@ -64,24 +64,23 @@
     }
 
     /* 📌 히어로 대문 - 검은색 배경 및 비율 맞춤(잘림 방지) */
-    .hero {
-      position: relative;
-      width: 100%;
-      height: clamp(180px, 25vw, 350px);
-      overflow: hidden;
-      background: #000000; /* 보라색 대신 순수 검은색 적용 */
-      display: none;
-      align-items: center;
-      justify-content: center;
-    }
+.hero {
+  width: 100%;
+  background: #000000; /* 순수 검은색 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0; /* 배너 위아래 은은한 여백 */
+}
 
-    .hero-bg {
-      width: 100%;
-      height: 100%;
-      object-fit: contain; /* 이미지가 잘리지 않고 전체가 들어오도록 설정 */
-      object-position: center; 
-      filter: none; /* 필터를 제거하여 로고 글자가 선명하게 노출됨 */
-    }
+.hero-bg {
+  max-width: 100%;
+  max-height: 300px; /* 화면에 너무 거대하게 나오지 않도록 높이 제한 */
+  width: auto;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
 
     .hero-overlay {
       position: absolute;
@@ -354,7 +353,6 @@
   <!-- 대문 헤더 -->
   <section class="hero">
     <img class="hero-bg" src="https://i.ibb.co/20PL6H8S/BAND-2026-07-22-16-39-39.jpg" alt="서브컬쳐 역극밴드 대문" />
-    <div class="hero-overlay"></div>
   </section>
 
   <main class="wrap">
